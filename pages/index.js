@@ -1,6 +1,16 @@
 import styles from '../styles/Home.module.css'
+import useSwr from 'swr'
+
+const fetcher = (url) => fetch(url).then((res) => res.json())
 
 export default function Home() {
+
+  const {data,error} = useSwr('/api/tasks',fetcher)
+
+  // catches for error or no data yet
+  if (error) return <div>Failed to load tasks</div>
+  if (!data) return <div>Loading...</div>
+
   return (
     <div className={styles.container}>
 
@@ -15,7 +25,9 @@ export default function Home() {
         </p>
 
         <div>
-  
+          {data.map((task) => (
+             <div key={task.id}>{task.title}</div>
+          ))}
         </div>
       </main>
 
@@ -25,7 +37,7 @@ export default function Home() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Powered by {'Vercel '}
+          Powered by {'Vercel'}
         </a>
       </footer>
     </div>

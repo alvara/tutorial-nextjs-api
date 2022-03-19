@@ -1,15 +1,9 @@
-import Head from 'next/head'
-import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 
 export default function Home() {
   return (
     <div className={styles.container}>
-      <Head>
-        <title>NextJS API Tutorial</title>
-        <meta name="description" content="Tutorial for NextJS" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+
 
       <main className={styles.main}>
         <h1 className={styles.title}>
@@ -31,10 +25,7 @@ export default function Home() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Powered by{' '}
-          <span className={styles.logo}>
-            <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
-          </span>
+          Powered by {'Vercel '}
         </a>
       </footer>
     </div>

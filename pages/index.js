@@ -5,41 +5,21 @@ const fetcher = (url) => fetch(url).then((res) => res.json())
 
 export default function Home() {
 
-  const {data,error} = useSwr('/api/tasks',fetcher)
+  const {data,error} = useSwr('/api/list',fetcher)
 
   // catches for error or no data yet
   if (error) return <div>Failed to load tasks</div>
   if (!data) return <div>Loading...</div>
 
   return (
-    <div className={styles.container}>
+    <>
+        <h1>API Tutorial</h1>
+        <p>A Todo app using NextJS API endpoints.</p>
 
-
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          NextJS API Tutorial
-        </h1>
-
-        <p className={styles.description}>
-          A Todo app using NextJS API endpoints.
-        </p>
-
-        <div>
-          {data.map((task) => (
-             <div key={task.id}>{task.title}</div>
-          ))}
-        </div>
-      </main>
-
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by {'Vercel'}
-        </a>
-      </footer>
-    </div>
+        {/* display list of tasks */}
+        {data.map((task) => (
+            <div key={task.id}>{task.title}</div>
+        ))}
+    </>
   )
 }

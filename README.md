@@ -1,34 +1,51 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<div id="top"></div>
+<!--
+*** Thanks for checking out the Best-README-Template. If you have a suggestion
+*** that would make this better, please fork the repo and create a pull request
+*** or simply open an issue with the tag "enhancement".
+*** Don't forget to give the project a star!
+*** Thanks again! Now go create something AMAZING! :D
+-->
 
-## Getting Started
+<!-- PROJECT SHIELDS -->
+<!--
+*** I'm using markdown "reference style" links for readability.
+*** Reference links are enclosed in brackets [ ] instead of parentheses ( ).
+*** See the bottom of this document for the declaration of the reference variables
+*** for contributors-url, forks-url, etc. This is an optional, concise syntax you may use.
+*** https://www.markdownguide.org/basic-syntax/#reference-style-links
+-->
 
-First, run the development server:
+<!-- PROJECT LOGO -->
+<br />
+<div align="center">
+  <h1 align="center">How to create API endpoints with NextJS</h1>
+  
+  <img src="preview.png" width="400">
+  <br />
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+  <strong align="center">
+    A NextJS tutorial on how to create API endpoints using API Routes
+<br/><br/>
+   <a href="https://github.com/alvara/tutorial-nextjs-api/issues">Report Bug</a>・
+   <a href="https://github.com/alvara/tutorial-nextjs-api/issues">Request Feature</a>
+  </strong>
+</div>
+<hr>
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+<!-- ABOUT THE PROJECT -->
+## Follow The Tutorial
+You can find the tutorial for this demo [here](https://jessealvarado.com/blog/how-to-create-api-endpoints-with-nextjs)
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+<!-- LICENSE -->
+## License
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+Distributed under the MIT License.
+* [View licenses](https://choosealicense.com)
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+<!-- CONTACT -->
+## Contact Developer
 
-## Learn More
+Jesse Alvarado - contact@jessealvarado.com
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+My Site: [jessealvarado.com](https://jessealvarado.com)

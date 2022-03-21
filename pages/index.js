@@ -1,4 +1,3 @@
-import styles from '../styles/Home.module.css'
 import useSwr from 'swr'
 
 const fetcher = (url) => fetch(url).then((res) => res.json())

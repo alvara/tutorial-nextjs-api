@@ -6,6 +6,11 @@ export default function handler(req, res) {
     const {id, title} = JSON.parse(req.body)
     let tasks = JSON.parse(getCookie('tasks',{ req, res}))
 
+    // return error if no task found
+    if(!title) {
+      return res.status(400).send({error: 'Title is required to update task'})
+    } 
+
     // update title for matching task id
     tasks = tasks.map((task) => {
       if(task.id === id) task.title = title

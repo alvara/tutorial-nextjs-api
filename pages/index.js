@@ -11,14 +11,11 @@ export default function Home() {
   const handleAddForm = async (e) => {
     e.preventDefault()
 
-    // prepare data for the request body
-    const data = JSON.stringify({task: e.target.task.value})
-
-    // send data to our API and get response
+    // send data to API and get response
     const res = await fetch('/api/tasks',{
       method: 'POST',
       headers: { 'Content-Type':'application/json'},
-      body: data
+      body: JSON.stringify({task: e.target.task.value})
     })
 
     // if successful, tell swr to revalidate tasks data and clear input
@@ -41,10 +38,12 @@ export default function Home() {
     editTask === id ? setEditTask(undefined) : setEditTask(id) 
   }
 
-  // update task
-  const handleSaveEdit = async (e, id, ) => {
+  // update task with new title input
+  const handleSaveEdit = async (e, id) => {
 
     e.preventDefault()
+
+    // send data to API and get response
     const res = await fetch(`/api/tasks/${id}`,{
       method: 'PUT',
       body: JSON.stringify({
@@ -60,11 +59,9 @@ export default function Home() {
     else {
       alert(JSON.stringify(res.statusText,null,2))
     }
-
-
   }
 
-  // delete task
+  // DELETE TASK
   const handleDeleteTask = async (id) => {
     const res = await fetch(`/api/tasks/${id}`,{
       method: 'DELETE'
@@ -78,7 +75,7 @@ export default function Home() {
     }
   }
     
-  // catches for error or no data yet
+  // catches if data error or doesnt exist yet
   if (error) return <div>Failed to load tasks</div>
   if (!data) return <div>Loading...</div>
 
@@ -91,6 +88,7 @@ export default function Home() {
       {data.map((task) => (
           <div key={task.id}>
             {editTask === task.id ? (
+              // edit form
               <form onSubmit={(e) => handleSaveEdit(e, task.id, e.target.title.value)}>
                 <input type="text" name="title" defaultValue={task.title} autoFocus/>
                 <button type="submit" >Save</button>
@@ -98,7 +96,7 @@ export default function Home() {
             ) : (
               <div> {task.title} 
                <button onClick={() => handleDeleteTask(task.id)}>Trash</button>
-            <button onClick={() => handleToggleEdit(task.id)}>Edit</button>
+               <button onClick={() => handleToggleEdit(task.id)}>Edit</button>
               </div>
             )}
            

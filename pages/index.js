@@ -5,7 +5,7 @@ const fetcher = (url) => fetch(url).then((res) => res.json())
 
 export default function Home() {
 
-  const {data,error} = useSwr('/api/list',fetcher)
+  const {data,error} = useSwr('/api/tasks',fetcher)
 
   // catches for error or no data yet
   if (error) return <div>Failed to load tasks</div>

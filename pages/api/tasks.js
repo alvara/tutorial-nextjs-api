@@ -1,6 +1,19 @@
 import {tasks} from '../../data/tasks'
 
-// list all tasks
 export default function handler(req, res) {
-  res.status(200).json(tasks)
+  // get a list of tasks
+  if(req.method === 'GET') res.status(200).json(tasks)
+
+  // add a task and 
+  if(req.method === 'POST') {
+
+    // return error if no task found
+    if(!req.body.task) {
+      res.status(400).send("Error: Please enter a task")
+    } 
+
+    // add task to our array of tasks
+    tasks.push({id: tasks.length + 1,title: req.body.task})
+    res.status(200).json(tasks)
+  }
 }

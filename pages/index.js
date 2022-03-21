@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import useSwr, { mutate } from 'swr'
 
 const fetcher = (url) => fetch(url).then((res) => res.json())
@@ -5,17 +6,12 @@ const fetcher = (url) => fetch(url).then((res) => res.json())
 export default function Home() {
 
   const {data,error} = useSwr('/api/tasks',fetcher)
-  
-  // catches for error or no data yet
-  if (error) return <div>Failed to load tasks</div>
-  if (!data) return <div>Loading...</div>
 
-  // send request to add task
-  const handleAddTask = async (e) => {
-    // prevent form from refreshing page 
+  // ADD TASK
+  const handleAddForm = async (e) => {
     e.preventDefault()
 
-    // prepare data for the body
+    // prepare data for the request body
     const data = JSON.stringify({task: e.target.task.value})
 
     // send data to our API and get response
@@ -37,6 +33,55 @@ export default function Home() {
     }
   }
 
+  // EDIT TASK
+  const [editTask, setEditTask] = useState()
+
+  // toggle edit if id is the same
+  const handleToggleEdit = (id) => {
+    editTask === id ? setEditTask(undefined) : setEditTask(id) 
+  }
+
+  // update task
+  const handleSaveEdit = async (e, id, ) => {
+
+    e.preventDefault()
+    const res = await fetch(`/api/tasks/${id}`,{
+      method: 'PUT',
+      body: JSON.stringify({
+        id: id,
+        title: e.target.title.value
+      })
+    })
+    
+    if(res.status === 200) {
+      mutate('/api/tasks')
+      setEditTask(undefined)
+    }
+    else {
+      alert(JSON.stringify(res.statusText,null,2))
+    }
+
+
+  }
+
+  // delete task
+  const handleDeleteTask = async (id) => {
+    const res = await fetch(`/api/tasks/${id}`,{
+      method: 'DELETE'
+    })
+    
+    if(res.status === 200) {
+      mutate('/api/tasks')
+    }
+    else {
+      alert(JSON.stringify(res.statusText,null,2))
+    }
+  }
+    
+  // catches for error or no data yet
+  if (error) return <div>Failed to load tasks</div>
+  if (!data) return <div>Loading...</div>
+
   return (
     <>
       <h1>API Tutorial</h1>
@@ -44,11 +89,25 @@ export default function Home() {
 
       {/* display list of tasks */}
       {data.map((task) => (
-          <div key={task.id}>{task.title}</div>
+          <div key={task.id}>
+            {editTask === task.id ? (
+              <form onSubmit={(e) => handleSaveEdit(e, task.id, e.target.title.value)}>
+                <input type="text" name="title" defaultValue={task.title} autoFocus/>
+                <button type="submit" >Save</button>
+              </form> 
+            ) : (
+              <div> {task.title} 
+               <button onClick={() => handleDeleteTask(task.id)}>Trash</button>
+            <button onClick={() => handleToggleEdit(task.id)}>Edit</button>
+              </div>
+            )}
+           
+           
+          </div>
       ))}
 
       {/* form to add a task */}
-      <form method='POST' action='/api/tasks' onSubmit={handleAddTask}>
+      <form onSubmit={handleAddForm}>
         <input type='text' name='task' autoFocus></input> 
         <button type='submit'>Add Task</button> 
       </form>

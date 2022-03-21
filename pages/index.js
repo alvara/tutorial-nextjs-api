@@ -81,34 +81,40 @@ export default function Home() {
 
   return (
     <>
-      <h1>API Tutorial</h1>
-      <p>A Todo app using NextJS API endpoints.</p>
+      <h1>NextJS API Tutorial</h1>
+      <p>A Todo app with CRUD functionality through NextJS API endpoints</p>
 
       {/* display list of tasks */}
-      {data.map((task) => (
-          <div key={task.id}>
-            {editTask === task.id ? (
-              // edit form
-              <form onSubmit={(e) => handleSaveEdit(e, task.id, e.target.title.value)}>
-                <input type="text" name="title" defaultValue={task.title} autoFocus/>
-                <button type="submit" >Save</button>
-              </form> 
-            ) : (
-              <div> {task.title} 
-               <button onClick={() => handleDeleteTask(task.id)}>Trash</button>
-               <button onClick={() => handleToggleEdit(task.id)}>Edit</button>
-              </div>
-            )}
-           
-           
-          </div>
-      ))}
+      <div className='tasks'>
+        {data.map((task) => (
+            <div key={task.id}>
+              {editTask === task.id ? (
+                // edit form
+                <form className='editing' onSubmit={(e) => handleSaveEdit(e, task.id, e.target.title.value)}>
+                    <input type="text" name="title" defaultValue={task.title} autoFocus/>
+                  <span>
+                    <button type="submit" >Save</button>
+                  </span>
+                </form> 
+              ) : (
+                <div> 
+                  {task.title} 
+                  <span>
+                    <button onClick={() => handleDeleteTask(task.id)}>Trash</button>
+                    <button onClick={() => handleToggleEdit(task.id)}>Edit</button>
+                  </span>
+                </div>
+              )}
+            </div>
+        ))}
 
-      {/* form to add a task */}
-      <form onSubmit={handleAddForm}>
-        <input type='text' name='task' autoFocus></input> 
-        <button type='submit'>Add Task</button> 
-      </form>
+        {/* form to add a task */}
+        <form onSubmit={handleAddForm}>
+          <input type='text' name='task' placeholder='Enter New Task' autoFocus></input> 
+          <button type='submit'>Add Task</button> 
+        </form>
+      </div>
+
     </>
   )
 }

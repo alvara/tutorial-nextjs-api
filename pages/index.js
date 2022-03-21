@@ -25,23 +25,22 @@ export default function Home() {
       body: data
     })
 
-    // if successful, tell swr to revalidate tasks data
+    // if successful, tell swr to revalidate tasks data and clear input
     if(res.status === 200) {
       mutate('/api/tasks')
-      
-      // clear input and refocus on it
       e.target.task.value = ''
-      e.target.task.focus()
     }
-    else {
-      alert(JSON.stringify(res.error(),null,2))
+
+    // if error, tell user
+    if(res.status === 400) {
+      alert(JSON.stringify(res.statusText,null,2))
     }
   }
 
   return (
     <>
       <h1>API Tutorial</h1>
-      <mute>A Todo app using NextJS API endpoints.</mute>
+      <p>A Todo app using NextJS API endpoints.</p>
 
       {/* display list of tasks */}
       {data.map((task) => (
@@ -50,7 +49,7 @@ export default function Home() {
 
       {/* form to add a task */}
       <form method='POST' action='/api/tasks' onSubmit={handleAddTask}>
-        <input type='text' name='task' ></input> 
+        <input type='text' name='task' autoFocus></input> 
         <button type='submit'>Add Task</button> 
       </form>
     </>
